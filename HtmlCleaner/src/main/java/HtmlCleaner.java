@@ -57,7 +57,7 @@ public class HtmlCleaner {
 		return processString(html, str -> str.replaceAll("&[\\S]*?;",  ""));
 		
 	}
-//a
+
 	/**
 	 * Replaces all HTML tags with an empty string. For example, "A<b>B</b>C" will
 	 * become "ABC".
@@ -66,8 +66,8 @@ public class HtmlCleaner {
 	 * @return text without any HTML tags
 	 */
 	public static String stripTags(String html) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+		
+		return processString(html, str -> str.replaceAll("<.*?[\n\r]*.*?>", ""));
 	}
 
 	/**
