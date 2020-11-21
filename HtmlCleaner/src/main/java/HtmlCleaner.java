@@ -57,7 +57,7 @@ public class HtmlCleaner {
 		return processString(html, str -> str.replaceAll("&[\\S]*?;",  ""));
 		
 	}
-
+//a
 	/**
 	 * Replaces all HTML tags with an empty string. For example, "A<b>B</b>C" will
 	 * become "ABC".
