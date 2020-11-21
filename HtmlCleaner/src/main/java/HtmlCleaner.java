@@ -1,4 +1,7 @@
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Cleans simple, validating HTML 4/5 into plain text.
@@ -50,8 +53,9 @@ public class HtmlCleaner {
 	 * @return text without any HTML entities
 	 */
 	public static String stripEntities(String html) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+		
+		return processString(html, str -> str.replaceAll("&[\\S]*?;",  ""));
+		
 	}
 
 	/**
@@ -90,8 +94,16 @@ public class HtmlCleaner {
 	 * @see Matcher#replaceAll(java.util.function.Function)
 	 */
 	public static String stripComments(String html) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+
+		return processString(html, str -> {
+			
+			String noLineComments = str.replaceAll("<!--.*?-->", "");
+			System.out.println("NO LINE COMMENTS:\t" + noLineComments);
+			String removedComments = noLineComments.replaceAll("<!--[\\r\\n.]*.*[\\r\\n]+.*-->", " ");
+			System.out.println("REMOVED COMMENTS:\t" + removedComments);
+			return removedComments;
+			
+		});
 	}
 
 	/**
@@ -126,5 +138,29 @@ public class HtmlCleaner {
 	 */
 	public static boolean hasNewline(String input) {
 		return input.matches(".*[\n\r]+.*");
+	}
+	
+	private static String findMatchingSubstring(String regex, String match) {
+		
+		return match.replaceAll(regex, "");
+		
+	}
+	
+	private static String processString(String str, Function<String, String> stringFunc) {
+		
+		return stringFunc.apply(str);
+	
+	}
+	
+	
+	// TODO: Testing - delete
+	public static void main(String[] args) {
+		
+		String regex = "&.*;";
+		String match = "&aaaaaaaaaaaaaaaaaaaaaa;      da";
+		
+		Matcher m = Pattern.compile(regex).matcher(match);
+		System.out.println(m.find());
+		System.out.println(m.group());
 	}
 }
