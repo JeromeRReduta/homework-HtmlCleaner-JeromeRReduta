@@ -96,13 +96,8 @@ public class HtmlCleaner {
 	public static String stripComments(String html) {
 
 		return processString(html, str -> {
-			
-			String noLineComments = str.replaceAll("<!--.*?-->", "");
-			System.out.println("NO LINE COMMENTS:\t" + noLineComments);
-			String removedComments = noLineComments.replaceAll("<!--[\\r\\n.]*.*[\\r\\n]+.*-->", " ");
-			System.out.println("REMOVED COMMENTS:\t" + removedComments);
-			return removedComments;
-			
+			// Replaces single-line comments w/ empty string, and then multi-line comments w/ one space
+			return str.replaceAll("<!--.*?-->", "").replaceAll("<!--[\\r\\n.]*.*[\\r\\n]+.*-->", " ");
 		});
 	}
 
@@ -126,8 +121,13 @@ public class HtmlCleaner {
 	 * @see Matcher#replaceAll(java.util.function.Function)
 	 */
 	public static String stripElement(String html, String name) {
-		// TODO Fill in this method.
-		throw new UnsupportedOperationException("Not yet implemented.");
+		
+		return processString(html, str -> {
+
+			return str.replaceAll("<" + name + ".*?>.*?</" + name + ">", "").replaceAll("<" + name + ".*[\\r\\n]*.*>.*[\\r\\n]*.*[\\r\\n]*.*" + "</" + name + ">", " ");
+			
+		});
+		
 	}
 	
 	/**

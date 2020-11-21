@@ -1,0 +1,84 @@
+
+
+
+
+
+    Pangrams
+    
+    
+        body
+        {
+            font-family: sans-serif;
+        }
+        
+        .elephant
+        {
+            color: green;
+        }
+    
+
+
+
+
+The quick, brown fox jumps over a lazy dog.
+
+
+    
+DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox  whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex!  Fox nymphs grab quick-jived waltz. Painful zombies quickly watch a jinxed graveyard.
+
+Anything unrelated to elephants is irrelphant.
+
+new TWTR.Widget({
+  version: 2,
+  type: 'profile',
+  rpp: 4,
+  interval: 30000,
+  width: 250,
+  height: 300,
+  theme: {
+    shell: {
+      background: '#333333',
+      color: '#ffffff'
+    },
+    tweets: {
+      background: '#000000',
+      color: '#ffffff',
+      links: '#4aed05'
+    }
+  },
+  features: {
+    scrollbar: false,
+    loop: false,
+    live: false,
+    behavior: 'all'
+  }
+}).render().setUser('usfca').start();
+
+
+Brick quiz whangs  jumpy veldt fox.
+    
+Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. How quickly daft jumping zebras vex. Cozy lummox gives smart squid who asks for job pen.
+
+
+
+
+    Quick, Baz, get my woven flax jodhpurs! 
+    "Now fax quiz Jack!" my brave ghost pled. 
+    Five quacking zephyrs jolt my wax bed. 
+
+
+
+
+    Cozy sphinx waves quart jug of  bad milk.
+    A very bad quack might jinx zippy fowls.
+
+
+    Few quips galvanized the mock jury box.
+
+
+
+ Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! How razorback-jumping  frogs can level six piqued gymnasts!
+
+
+
+
