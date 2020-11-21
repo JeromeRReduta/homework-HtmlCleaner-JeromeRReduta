@@ -54,7 +54,11 @@ public class HtmlCleaner {
 	 */
 	public static String stripEntities(String html) {
 		
-		return processString(html, str -> str.replaceAll("&[\\S]*?;",  ""));
+		return processString(html, str -> {
+			String regex = "&[\\S]*?;";
+		
+			return str.replaceAll(regex,  "");
+		});
 		
 	}
 
@@ -67,7 +71,11 @@ public class HtmlCleaner {
 	 */
 	public static String stripTags(String html) {
 		
-		return processString(html, str -> str.replaceAll("<.*?[\n\r]*.*?>", ""));
+		return processString(html, str -> {
+			String regex = "<.*?[\n\r]*.*?>";
+			
+			return str.replaceAll(regex,  "");
+		});
 	}
 
 	/**
@@ -96,8 +104,10 @@ public class HtmlCleaner {
 	public static String stripComments(String html) {
 
 		return processString(html, str -> {
+			String oneLineRegex = "<!--.*?-->";
+			String multiLineRegex = "<!--(.*\\r?\\n)*\\s*-->";
 			// Replaces single-line comments w/ empty string, and then multi-line comments w/ one space
-			return str.replaceAll("<!--.*?-->", "").replaceAll("<!--[\\r\\n.]*.*[\\r\\n]+.*-->", " ");
+			return str.replaceAll(oneLineRegex, "").replaceAll(multiLineRegex, " ");
 		});
 	}
 
@@ -121,12 +131,16 @@ public class HtmlCleaner {
 	 * @see Matcher#replaceAll(java.util.function.Function)
 	 */
 	public static String stripElement(String html, String name) {
-		
 		return processString(html, str -> {
-
-			return str.replaceAll("<" + name + ".*?>.*?</" + name + ">", "").replaceAll("<" + name + ".*[\\r\\n]*.*>.*[\\r\\n]*.*[\\r\\n]*.*" + "</" + name + ">", " ");
+			
+			String oneLineRegex = "<" + name + ".*?>.*?</" + name + ">";
+			String multiLineRegex = "<" + name + "(.*\\r?\\n)*\\s*</" + name + "\s*>";
+			
+			return str.replaceAll(oneLineRegex, "").replaceAll(multiLineRegex, " ");
 			
 		});
+		
+		
 		
 	}
 	
@@ -140,27 +154,10 @@ public class HtmlCleaner {
 		return input.matches(".*[\n\r]+.*");
 	}
 	
-	private static String findMatchingSubstring(String regex, String match) {
-		
-		return match.replaceAll(regex, "");
-		
-	}
-	
 	private static String processString(String str, Function<String, String> stringFunc) {
 		
 		return stringFunc.apply(str);
 	
 	}
 	
-	
-	// TODO: Testing - delete
-	public static void main(String[] args) {
-		
-		String regex = "&.*;";
-		String match = "&aaaaaaaaaaaaaaaaaaaaaa;      da";
-		
-		Matcher m = Pattern.compile(regex).matcher(match);
-		System.out.println(m.find());
-		System.out.println(m.group());
-	}
 }
