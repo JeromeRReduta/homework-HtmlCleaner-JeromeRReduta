@@ -72,7 +72,7 @@ public class HtmlCleaner {
 	public static String stripTags(String html) {
 		
 		return processString(html, str -> {
-			String regex = "<.*?[\n\r]*.*?>";
+			String regex = "<.*?[\\n\\r]*.*?>";
 			
 			return str.replaceAll(regex,  "");
 		});
@@ -103,6 +103,7 @@ public class HtmlCleaner {
 	 */
 	public static String stripComments(String html) {
 
+		// Thank you LinkedIn lecture from class for teaching me about containing groups
 		return processString(html, str -> {
 			String oneLineRegex = "<!--.*?-->";
 			String multiLineRegex = "<!--(.*\\r?\\n)*\\s*-->";
@@ -132,15 +133,12 @@ public class HtmlCleaner {
 	 */
 	public static String stripElement(String html, String name) {
 		return processString(html, str -> {
-			
 			String oneLineRegex = "<" + name + ".*?>.*?</" + name + ">";
-			String multiLineRegex = "<" + name + "(.*\\r?\\n)*\\s*</" + name + "\s*>";
+			String multiLineRegex = "<" + name + "(.*\\r?\\n)*\\s*</" + name + "\\s*>";
 			
 			return str.replaceAll(oneLineRegex, "").replaceAll(multiLineRegex, " ");
 			
 		});
-		
-		
 		
 	}
 	
@@ -154,6 +152,12 @@ public class HtmlCleaner {
 		return input.matches(".*[\n\r]+.*");
 	}
 	
+	/**
+	 * Processes string with the given function
+	 * @param str String
+	 * @param stringFunc function to process string
+	 * @return string processed with function
+	 */
 	private static String processString(String str, Function<String, String> stringFunc) {
 		
 		return stringFunc.apply(str);
